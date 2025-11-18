@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Photo Gallery - Final Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        
+        #image {
+            width: 600px;
+            height: 400px;
+            margin: 20px auto;
+            background-color: #e0e0e0;
+            background-image: url('');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-size: 18px;
+        }
+        
+        .preview {
+            cursor: pointer;
+            margin: 15px;
+            display: inline-block;
+            border: 2px solid transparent;
+            transition: border 0.3s;
+        }
+        
+        .preview:hover, .preview:focus {
+            border: 2px solid #0066cc;
+            outline: none;
+        }
+        
+        .preview img {
+            width: 180px;
+            height: 120px;
+            object-fit: cover;
+        }
+        
+        h1 {
+            color: #333;
+        }
+        
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body onload="addTabIndex()">
+    <h1>Interactive Photo Gallery - Final Project</h1>
+    
+    <div id="image">
+        Hover over an image below to display here.
+    </div>
+    
+    <div class="gallery">
+        <!-- 6 صور كما مطلوب -->
+        <img class="preview" src="https://picsum.photos/180/120?random=1" 
+             alt="Beautiful Mountain Landscape"
+             onmouseover="upDate(this)" onmouseout="undo()"
+             onfocus="upDate(this)" onblur="undo()">
+        
+        <img class="preview" src="https://picsum.photos/180/120?random=2" 
+             alt="Modern City Skyline at Night"
+             onmouseover="upDate(this)" onmouseout="undo()"
+             onfocus="upDate(this)" onblur="undo()">
+        
+        <img class="preview" src="https://picsum.photos/180/120?random=3" 
+             alt="Serene Beach with Palm Trees"
+             onmouseover="upDate(this)" onmouseout="undo()"
+             onfocus="upDate(this)" onblur="undo()">
+        
+        <img class="preview" src="https://picsum.photos/180/120?random=4" 
+             alt="Forest with Sunlight Through Trees"
+             onmouseover="upDate(this)" onmouseout="undo()"
+             onfocus="upDate(this)" onblur="undo()">
+        
+        <img class="preview" src="https://picsum.photos/180/120?random=5" 
+             alt="Snowy Mountain Peak"
+             onmouseover="upDate(this)" onmouseout="undo()"
+             onfocus="upDate(this)" onblur="undo()">
+        
+        <img class="preview" src="https://picsum.photos/180/120?random=6" 
+             alt="Desert Sunset with Cactus"
+             onmouseover="upDate(this)" onmouseout="undo()"
+             onfocus="upDate(this)" onblur="undo()">
+    </div>
+
+    <script>
+        // دالة upDate الأصلية
+        function upDate(previewPic) {
+            console.log("Event triggered - Image:", previewPic.alt);
+            console.log("Image source:", previewPic.src);
+            
+            document.getElementById('image').innerHTML = previewPic.alt;
+            document.getElementById('image').style.backgroundImage = "url('" + previewPic.src + "')";
+        }
+
+        // دالة undo الأصلية
+        function undo() {
+            document.getElementById('image').style.backgroundImage = "url('')";
+            document.getElementById('image').innerHTML = "Hover over an image below to display here.";
+        }
+
+        // الدالة الجديدة للمشروع النهائي - تضيف tabindex
+        function addTabIndex() {
+            console.log("Page loaded - adding tabindex to all images");
+            
+            // الحصول على جميع الصور
+            var images = document.getElementsByClassName('preview');
+            
+            // تكرار for loop لإضافة tabindex
+            for (var i = 0; i < images.length; i++) {
+                images[i].setAttribute('tabindex', '0');
+                console.log("Added tabindex to image:", i+1);
+            }
+            
+            console.log("Tabindex added to", images.length, "images");
+        }
+    </script>
+</body>
+</html>
